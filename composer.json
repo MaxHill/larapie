@@ -1,0 +1,23 @@
+{
+    "name": "maxhill/api",
+    "description": "Laravel Api package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Max Hill",
+            "email": "max@hilloco.se"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Maxhill\\Api\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "5.2.*",
+        "league/fractal": "^0.13.0",
+        "tymon/jwt-auth": "0.5.*"
+    }
+}
