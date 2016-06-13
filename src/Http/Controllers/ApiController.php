@@ -5,7 +5,6 @@ namespace Maxhill\Api\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use League\Fractal\Manager;
-use Maxhill\Api\Http\Controllers\canReturnApiResponses;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
