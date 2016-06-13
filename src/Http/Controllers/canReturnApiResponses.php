@@ -9,11 +9,11 @@ use League\Fractal\Resource\Item;
 trait canReturnApiResponses {
     protected $statusCode = 200;
 
-    const CODE_WRONG_ARGS = 'GEN-FUBARGS';
-    const CODE_NOT_FOUND = 'GEN-LIKETHEWIND';
-    const CODE_INTERNAL_ERROR = 'GEN-AAAGGH';
-    const CODE_UNAUTHORIZED = 'GEN-MAYBGTFO';
-    const CODE_FORBIDDEN = 'GEN-GTFO';
+    protected $CODE_WRONG_ARGS = 'GEN-FUBARGS';
+    protected $CODE_NOT_FOUND = 'GEN-LIKETHEWIND';
+    protected $CODE_INTERNAL_ERROR = 'GEN-AAAGGH';
+    protected $CODE_UNAUTHORIZED = 'GEN-MAYBGTFO';
+    protected $CODE_FORBIDDEN = 'GEN-GTFO';
 
     /**
      * Setter for statusCode
@@ -83,7 +83,7 @@ trait canReturnApiResponses {
     public function errorForbidden($message = 'Forbidden')
     {
         return $this->setStatusCode(403)
-            ->respondWithError($message, self::CODE_FORBIDDEN);
+            ->respondWithError($message, $this->CODE_FORBIDDEN);
     }
 
     /**
@@ -94,7 +94,7 @@ trait canReturnApiResponses {
     public function errorInternalError($message = 'Internal Error')
     {
         return $this->setStatusCode(500)
-            ->respondWithError($message, self::CODE_INTERNAL_ERROR);
+            ->respondWithError($message, $this->CODE_INTERNAL_ERROR);
     }
 
     /**
@@ -105,7 +105,7 @@ trait canReturnApiResponses {
     public function errorNotFound($message = 'Resource Not Found')
     {
         return $this->setStatusCode(404)
-            ->respondWithError($message, self::CODE_NOT_FOUND);
+            ->respondWithError($message, $this->CODE_NOT_FOUND);
     }
 
     /**
@@ -116,7 +116,7 @@ trait canReturnApiResponses {
     public function errorUnauthorized($message = 'Unauthorized')
     {
         return $this->setStatusCode(401)
-            ->respondWithError($message, self::CODE_UNAUTHORIZED);
+            ->respondWithError($message, $this->CODE_UNAUTHORIZED);
     }
 
     /**
@@ -127,6 +127,6 @@ trait canReturnApiResponses {
     public function errorWrongArgs($message = 'Wrong Arguments')
     {
         return $this->setStatusCode(400)
-            ->respondWithError($message, self::CODE_WRONG_ARGS);
+            ->respondWithError($message, $this->CODE_WRONG_ARGS);
     }
 }
