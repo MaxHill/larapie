@@ -53,7 +53,7 @@ trait canReturnApiResponses {
         return $response;
     }
 
-    protected function respondWithError($message, $errorCode)
+    protected function respondWithError($title, $errorCode, $details = '')
     {
         if ($this->statusCode === 200) {
             trigger_error(
@@ -66,9 +66,10 @@ trait canReturnApiResponses {
             [
                 'errors' => [
                     [
+                        'title' => $title,
                         'code' => $errorCode,
                         'http_code' => $this->statusCode,
-                        'message' => $message,
+                        'details' => $details,
                     ]
                 ]
             ]
@@ -80,10 +81,10 @@ trait canReturnApiResponses {
      *
      * @return Response
      */
-    public function errorForbidden($message = 'Forbidden')
+    public function errorForbidden($title = 'Forbidden', $details = '')
     {
         return $this->setStatusCode(403)
-            ->respondWithError($message, $this->CODE_FORBIDDEN);
+            ->respondWithError($title, $this->CODE_FORBIDDEN, $details);
     }
 
     /**
@@ -91,10 +92,10 @@ trait canReturnApiResponses {
      *
      * @return Response
      */
-    public function errorInternalError($message = 'Internal Error')
+    public function errorInternalError($title = 'Internal Error', $details = '')
     {
         return $this->setStatusCode(500)
-            ->respondWithError($message, $this->CODE_INTERNAL_ERROR);
+            ->respondWithError($title, $this->CODE_INTERNAL_ERROR, $details);
     }
 
     /**
@@ -102,10 +103,10 @@ trait canReturnApiResponses {
      *
      * @return Response
      */
-    public function errorNotFound($message = 'Resource Not Found')
+    public function errorNotFound($title = 'Resource Not Found', $details = '')
     {
         return $this->setStatusCode(404)
-            ->respondWithError($message, $this->CODE_NOT_FOUND);
+            ->respondWithError($title, $this->CODE_NOT_FOUND, $details);
     }
 
     /**
@@ -113,10 +114,10 @@ trait canReturnApiResponses {
      *
      * @return Response
      */
-    public function errorUnauthorized($message = 'Unauthorized')
+    public function errorUnauthorized($title = 'Unauthorized', $details = '')
     {
         return $this->setStatusCode(401)
-            ->respondWithError($message, $this->CODE_UNAUTHORIZED);
+            ->respondWithError($title, $this->CODE_UNAUTHORIZED, $details);
     }
 
     /**
@@ -124,9 +125,9 @@ trait canReturnApiResponses {
      *
      * @return Response
      */
-    public function errorWrongArgs($message = 'Wrong Arguments')
+    public function errorWrongArgs($title = 'Wrong Arguments', $details = '')
     {
         return $this->setStatusCode(400)
-            ->respondWithError($message, $this->CODE_WRONG_ARGS);
+            ->respondWithError($title, $this->CODE_WRONG_ARGS, $details);
     }
 }
