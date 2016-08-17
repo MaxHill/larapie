@@ -3,10 +3,12 @@
 namespace Maxhill\Api\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use JWTAuth;
-use Illuminate\Http\Request;
+use Maxhill\Api\Transformers\AuthTransformer;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\User;
 
 class AuthenticateController extends ApiController
 {
@@ -26,12 +28,17 @@ class AuthenticateController extends ApiController
             return $this->errorInternalError('Could not create token');
         }
 
-        return $this->respondWithArray([
-            'data' => [
-                'token' => $token,
-                'timeout' => $timeout,
-            ]
-        ]);
+        $user = false;
+        if (config('api.include_user_on_authentication')) {
+            $user = User::where('email', $credentials['email'])->first();
+            $this->fractal->parseIncludes('user');
+        }
+
+        return $this->respondWithItem([
+            'token' => $token,
+            'timeout' => $timeout,
+            'user' => $user
+            ], new AuthTransformer);
     }
 
     /**
